@@ -6,7 +6,7 @@ def main():
     print("Start game.")
     help_menu()
 
-    valid_commands = ["q", "m", "s", "i"]
+    valid_commands = ["h", "q", "m", "s", "i"]
 
     inventory = Inventory()
 
@@ -17,6 +17,9 @@ def main():
             print("Invalid command.")
             continue
 
+        if user_input == "h":
+            help_menu()
+
         if user_input == "q":
             print("Quit game.")
             return
@@ -26,7 +29,12 @@ def main():
             inventory.add_item(ore)
 
         if user_input == "s":
-            smelt()
+            item = inventory.take_item()
+            if item == None:
+                print("No ores to smelt.")
+                continue
+            bar = smelt(item)
+            inventory.add_item(bar)
         
         if user_input == "i":
             inventory.show_inventory()
