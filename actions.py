@@ -3,23 +3,30 @@ from items import *
 
 def mine(vein):
     vein_to_mine = vein
-    extract = vein_to_mine.extract()
-    print("Ore extracted.")
+    extract = vein_to_mine.extract_ore()
+    animation()
+    print(f"{extract.type} ore extracted.")
     return extract
 
-def smelt():
-    pass
+def smelt(ore):
+    ore_to_smelt = ore
+    bar = ore_to_smelt.create_bar()
+    animation()
+    print(f"{bar.type} bar created.")
+    return bar
 
 def animation():
-    symbol = "*"
-
-    for i in range(5):
-        time.sleep(1)
-        print(symbol)
-        symbol += "*"
-
+    anim_sentence = "|---|"
+    
+    for i in range(len(anim_sentence)):
+        if anim_sentence[i] == "-":
+            time.sleep(0.5)
+            anim_sentence = anim_sentence.replace("-", ">", 1)
+            print(anim_sentence)
+        
 def help_menu():
     print("")
+    print("h: help menu")
     print("q: quit")
     print("m: mine")
     print("s: smelt")
